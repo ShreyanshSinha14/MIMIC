@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RELAY MIRROR</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>RELAY <span>MIRROR</span></h1>
+    <button id="scan" class="primary">Scan this page</button>
+  </header>
+
+  <section aria-label="Quick access (SENSE preview)" class="prefs">
+    <label><input type="checkbox" id="large"> Large text</label>
+    <label><input type="checkbox" id="contrast"> High contrast</label>
+  </section>
+
+  <div id="status" role="status" aria-live="polite">Open a website and press “Scan this page”.</div>
+
+  <section id="summary" hidden>
+    <div class="score" id="score"></div>
+    <div id="counts"></div>
+  </section>
+
+  <ul id="list"></ul>
+
+  <footer id="actions" hidden>
+    <button id="export">Download report (JSON)</button>
+    <button id="copy">Copy summary</button>
+    <button id="speak">Read aloud</button>
+  </footer>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+*{box-sizing:border-box}
+body{width:390px;max-height:600px;overflow-y:auto;margin:0;padding:12px;font:14px/1.4 system-ui,Arial,sans-serif;color:#111;background:#fff}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+h1{font-size:18px;margin:0}h1 span{color:#0b5cad}
+button{font:inherit;border:2px solid #0b5cad;background:#fff;color:#0b5cad;border-radius:6px;padding:5px 10px;cursor:pointer}
+button:hover,button:focus-visible{background:#0b5cad;color:#fff;outline:3px solid #ffbf47;outline-offset:1px}
+button.primary{background:#0b5cad;color:#fff}
+.prefs{display:flex;gap:16px;padding:6px 0;border-bottom:1px solid #ddd;margin-bottom:8px}
+#status{color:#444;margin:6px 0}
+.score{font-size:34px;font-weight:700}
+.score.good{color:#0a6b2d}.score.mid{color:#8a5a00}.score.bad{color:#b00020}
+ul{list-style:none;margin:8px 0;padding:0}
+li{border:1px solid #ccc;border-left:6px solid #b00020;border-radius:6px;padding:8px;margin-bottom:8px}
+li.warning{border-left-color:#c77700}
+.badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+li.error .badge{color:#b00020}li.warning .badge{color:#8a5a00}
+li h2{font-size:14px;margin:2px 0}
+li p{margin:2px 0;font-size:13px}
+.fix{background:#eef6ff;padding:4px 6px;border-radius:4px}
+code{font-size:11px;color:#555;word-break:break-all}
+.row{display:flex;gap:6px;margin-top:6px}
+footer{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}

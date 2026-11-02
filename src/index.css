@@ -1,0 +1,501 @@
+@import "tailwindcss";
+
+/* MIMIC accessible blue design system. Light mode is the clear default. */
+:root {
+  color-scheme: light;
+  --mimic-bg: #f2f6fd;
+  --mimic-surface: #ffffff;
+  --mimic-surface-raised: #f8faff;
+  --mimic-text: #14243b;
+  --mimic-muted: #536782;
+  --mimic-border: #d5e0ef;
+  --mimic-blue: #155eef;
+  --mimic-blue-hover: #124dcc;
+  --mimic-blue-soft: #e8f0ff;
+  --mimic-shadow: 0 8px 28px rgba(26, 65, 120, .09);
+}
+
+html, body, #root { min-height: 100%; }
+html.mimic-light-mode { color-scheme: light; }
+html.mimic-light-mode body {
+  color: var(--mimic-text);
+  background: linear-gradient(180deg, #f7faff 0%, #edf3fc 100%);
+}
+
+/* Dark mode: deep navy surfaces with readable near-white text and blue accents. */
+html.mimic-dark-mode:not(.mimic-high-contrast) {
+  color-scheme: dark;
+  --mimic-bg: #081426;
+  --mimic-surface: #10213a;
+  --mimic-surface-raised: #152b49;
+  --mimic-text: #f1f6ff;
+  --mimic-muted: #c0cee2;
+  --mimic-border: #2a4568;
+  --mimic-blue: #69a9ff;
+  --mimic-blue-hover: #8bbcff;
+  --mimic-blue-soft: #17345a;
+  --mimic-shadow: 0 12px 32px rgba(0, 0, 0, .28);
+}
+html.mimic-dark-mode:not(.mimic-high-contrast) body {
+  color: var(--mimic-text);
+  background: radial-gradient(ellipse at 15% 0%, rgba(32, 94, 173, .22), transparent 38%),
+              linear-gradient(180deg, #081426 0%, #0b1930 100%);
+  background-attachment: fixed;
+}
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-blue-50,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-blue-100,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-indigo-50,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-indigo-100,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-green-100,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-amber-50,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-red-50 {
+  color: var(--mimic-text) !important;
+  background: var(--mimic-surface-raised) !important;
+  border-color: var(--mimic-border) !important;
+}
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-gray-200,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-gray-300,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-slate-100 {
+  background: #263d5d !important;
+  color: #f1f6ff !important;
+}
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-amber-700,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-amber-900 { color: #ffd27a !important; }
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-green-700,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-green-800,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-green-900 { color: #8fe0ad !important; }
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-red-600,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-red-700,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-red-800 { color: #ff9b9b !important; }
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-indigo-800,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-indigo-900,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-blue-800,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-blue-900,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .text-slate-800 { color: #b6caff !important; }
+html.mimic-light-mode #root .bg-slate-700,
+html.mimic-light-mode #root .bg-slate-800 {
+  color: #174ea6 !important;
+  background: #e7effc !important;
+  border: 1px solid #c6d8f2 !important;
+}
+
+#root { min-height: 100vh; isolation: isolate; }
+#root > .min-h-screen.bg-gray-100 { background: var(--mimic-bg) !important; color: var(--mimic-text) !important; }
+#root .min-h-screen.bg-slate-950 { background: var(--mimic-bg) !important; color: var(--mimic-text) !important; }
+#root .min-h-screen.bg-slate-950 .bg-slate-900 { background: var(--mimic-surface) !important; color: var(--mimic-text) !important; border: 1px solid var(--mimic-border); box-shadow: var(--mimic-shadow); }
+#root header {
+  position: relative;
+  z-index: 5;
+  color: var(--mimic-text) !important;
+  background: var(--mimic-surface) !important;
+  border-color: var(--mimic-border) !important;
+  box-shadow: var(--mimic-shadow);
+}
+#root header h1, #root aside h2 { color: var(--mimic-blue) !important; }
+#root header p, #root header span { color: var(--mimic-muted) !important; }
+#root aside {
+  color: var(--mimic-text) !important;
+  background: var(--mimic-surface) !important;
+  border-color: var(--mimic-border) !important;
+  box-shadow: var(--mimic-shadow);
+}
+#root aside a {
+  color: var(--mimic-muted) !important;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+#root aside a:hover, #root aside a:focus-visible {
+  color: var(--mimic-blue) !important;
+  background: var(--mimic-blue-soft) !important;
+  border-color: var(--mimic-border);
+}
+#root main { color: var(--mimic-text); background: transparent !important; }
+#root main .bg-white,
+#root main .bg-gray-50,
+#root main .bg-gray-100,
+#root main .bg-orange-50,
+#root main .bg-slate-900,
+#root main .bg-gray-900,
+#root main .bg-slate-950 {
+  color: var(--mimic-text) !important;
+  background: var(--mimic-surface) !important;
+  border-color: var(--mimic-border) !important;
+}
+#root main .bg-slate-900.text-white,
+#root main .bg-gray-900.text-white { color: var(--mimic-text) !important; }
+#root main .text-gray-900, #root main .text-gray-800,
+#root main .text-slate-950, #root main .text-slate-900,
+#root main .bg-slate-900.text-white, #root main .bg-gray-900.text-white { color: var(--mimic-text) !important; }
+#root main .text-gray-700, #root main .text-gray-600,
+#root main .text-gray-500, #root main .text-slate-500,
+#root main .text-slate-400, #root main .text-slate-300 {
+  color: var(--mimic-muted) !important;
+}
+#root main button.text-white { color: #ffffff !important; }
+#root main .text-blue-100 { color: #eaf3ff !important; }
+#root main .text-blue-400, #root main .text-blue-600, #root main .text-blue-700,
+#root main .text-blue-800, #root main .text-indigo-700 { color: var(--mimic-blue) !important; }
+#root main .border-gray-100, #root main .border-gray-200,
+#root main .border-gray-300, #root main .border-slate-700,
+#root main .border-slate-600 { border-color: var(--mimic-border) !important; }
+#root main section.rounded-xl, #root main section.rounded-2xl,
+#root main div.rounded-xl, #root main div.rounded-2xl {
+  border-color: var(--mimic-border);
+}
+#root main section.rounded-xl, #root main section.rounded-2xl,
+#root main .shadow-sm, #root main .shadow-md, #root main .shadow-lg {
+  box-shadow: var(--mimic-shadow) !important;
+}
+#root main section.rounded-xl, #root main section.rounded-2xl {
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+#root main section.rounded-xl:hover, #root main section.rounded-2xl:hover {
+  border-color: var(--mimic-blue);
+  box-shadow: 0 12px 32px rgba(21, 94, 239, .12) !important;
+}
+
+/* Keep the main welcome banner distinctly blue and its white text readable. */
+#root #overview {
+  position: relative;
+  overflow: hidden;
+  color: #ffffff !important;
+  background: linear-gradient(115deg, #1246a3 0%, #1765d8 58%, #244fba 100%) !important;
+  border: 1px solid #397ce0 !important;
+  box-shadow: 0 14px 34px rgba(21, 82, 174, .22) !important;
+}
+#root #overview h2, #root #overview p { color: #ffffff !important; }
+#root #overview::after {
+  content: ""; position: absolute; width: 250px; height: 250px;
+  right: -100px; top: -145px; border: 1px solid rgba(255,255,255,.25);
+  border-radius: 50%; box-shadow: 0 0 0 24px rgba(255,255,255,.045), 0 0 0 52px rgba(255,255,255,.03);
+  pointer-events: none;
+}
+
+/* Buttons and interactive elements. */
+#root button {
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease;
+}
+#root button:not(:disabled):hover { filter: brightness(1.06); }
+#root button:not(:disabled):active { transform: translateY(1px); }
+#root button:disabled { cursor: not-allowed; opacity: .58; }
+#root .bg-blue-600, #root .bg-blue-700 {
+  color: #ffffff !important;
+  background: #155eef !important;
+  border-color: #155eef !important;
+}
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-blue-600,
+html.mimic-dark-mode:not(.mimic-high-contrast) #root .bg-blue-700 {
+  color: #071426 !important; background: #8bbcff !important; border-color: #8bbcff !important;
+}
+#root button:focus-visible, #root a:focus-visible,
+#root input:focus-visible, #root textarea:focus-visible,
+#root select:focus-visible, :focus-visible {
+  outline: 3px solid #1672f9;
+  outline-offset: 3px;
+}
+
+/* Inputs: clear boundaries and visible placeholder text in both themes. */
+#root input:not([type="checkbox"]):not([type="radio"]),
+#root textarea, #root select {
+  color: var(--mimic-text) !important;
+  background: var(--mimic-surface-raised) !important;
+  border: 1px solid var(--mimic-border) !important;
+}
+#root input::placeholder, #root textarea::placeholder { color: var(--mimic-muted) !important; opacity: 1; }
+#root input:focus, #root textarea:focus, #root select:focus {
+  border-color: var(--mimic-blue) !important;
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, .16);
+}
+#root input[type="checkbox"], #root input[type="radio"] { accent-color: var(--mimic-blue); }
+#root a { color: var(--mimic-blue); }
+#root ::selection { color: #ffffff; background: #155eef; }
+
+/* Quick controls stay reachable without covering page content. */
+.mimic-quick-theme-controls {
+  position: fixed; right: 18px; bottom: 18px; z-index: 100;
+  display: flex; flex-direction: column; align-items: stretch; gap: 9px;
+}
+.mimic-theme-toggle, .mimic-contrast-toggle {
+  min-width: 164px; min-height: 44px; padding: 10px 15px;
+  border-radius: 999px; font-size: 14px; font-weight: 750;
+  box-shadow: 0 8px 24px rgba(10, 35, 75, .2);
+}
+.mimic-theme-toggle {
+  color: #ffffff !important; background: #174ea6 !important;
+  border: 2px solid #4d8ce8 !important;
+}
+.mimic-contrast-toggle {
+  color: #ffffff !important; background: #12315d !important;
+  border: 2px solid #8bbcff !important;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute; top: -100px; left: 12px; z-index: 9999;
+  background: #ffffff; color: #10213a; padding: 12px 16px;
+  border: 2px solid #155eef; border-radius: 8px; font-weight: 700;
+}
+.skip-link:focus { top: 12px; }
+
+/* High contrast is the strongest setting and overrides either theme. */
+html.mimic-high-contrast, html.mimic-high-contrast body,
+html.mimic-high-contrast #root {
+  color-scheme: dark !important; background: #000000 !important; color: #ffffff !important;
+}
+html.mimic-high-contrast #root,
+html.mimic-high-contrast #root * {
+  color: #ffffff !important; background-color: transparent !important;
+  background-image: none !important; border-color: #ffffff !important;
+  box-shadow: none !important; text-shadow: none !important;
+}
+html.mimic-high-contrast #root > .min-h-screen,
+html.mimic-high-contrast #root main { background: #000000 !important; }
+html.mimic-high-contrast #root #overview {
+  color: #ffffff !important; background: #000000 !important;
+  border: 2px solid #ffffff !important; box-shadow: none !important;
+}
+html.mimic-high-contrast #root #overview * { color: #ffffff !important; }
+html.mimic-high-contrast #root a,
+html.mimic-high-contrast #root a * { color: #ffff00 !important; text-decoration: underline !important; }
+html.mimic-high-contrast #root button,
+html.mimic-high-contrast #root [role="button"],
+html.mimic-high-contrast #root input[type="button"],
+html.mimic-high-contrast #root input[type="submit"] {
+  color: #000000 !important; background: #ffff00 !important;
+  border: 2px solid #ffff00 !important; font-weight: 800 !important;
+}
+html.mimic-high-contrast #root button *,
+html.mimic-high-contrast #root [role="button"] * { color: #000000 !important; }
+html.mimic-high-contrast #root input:not([type="checkbox"]):not([type="radio"]),
+html.mimic-high-contrast #root textarea,
+html.mimic-high-contrast #root select {
+  color: #ffffff !important; background: #000000 !important;
+  border: 2px solid #ffff00 !important; caret-color: #ffff00 !important;
+}
+html.mimic-high-contrast #root input::placeholder,
+html.mimic-high-contrast #root textarea::placeholder { color: #eeeeee !important; opacity: 1 !important; }
+html.mimic-high-contrast #root input[type="checkbox"],
+html.mimic-high-contrast #root input[type="radio"] { accent-color: #ffff00 !important; }
+html.mimic-high-contrast #root :focus-visible { outline: 3px solid #00ffff !important; outline-offset: 3px !important; }
+html.mimic-high-contrast #root img,
+html.mimic-high-contrast #root video,
+html.mimic-high-contrast #root canvas,
+html.mimic-high-contrast #root svg { filter: none !important; opacity: 1 !important; }
+html.mimic-high-contrast .mimic-theme-toggle,
+html.mimic-high-contrast .mimic-contrast-toggle {
+  color: #000000 !important; background: #ffff00 !important; border-color: #ffff00 !important;
+}
+
+@media (max-width: 640px) {
+  .mimic-quick-theme-controls { right: 10px; bottom: 10px; }
+  .mimic-theme-toggle, .mimic-contrast-toggle { min-width: 145px; min-height: 42px; font-size: 12px; }
+  #root main { padding-left: 1rem; padding-right: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* MIMIC appearance controls: consistent, readable accents across every screen. */
+html[data-mimic-theme="blue"] { --mimic-blue:#155eef; --mimic-blue-hover:#124dcc; --mimic-blue-soft:#e8f0ff; --mimic-theme-rgb:21,94,239; }
+html[data-mimic-theme="violet"] { --mimic-blue:#6941c6; --mimic-blue-hover:#5632aa; --mimic-blue-soft:#f0eaff; --mimic-theme-rgb:105,65,198; }
+html[data-mimic-theme="teal"] { --mimic-blue:#087f8c; --mimic-blue-hover:#066a75; --mimic-blue-soft:#e2f6f6; --mimic-theme-rgb:8,127,140; }
+html[data-mimic-theme="rose"] { --mimic-blue:#c0265a; --mimic-blue-hover:#a51f4c; --mimic-blue-soft:#fff0f4; --mimic-theme-rgb:192,38,90; }
+html[data-mimic-theme="amber"] { --mimic-blue:#925900; --mimic-blue-hover:#754700; --mimic-blue-soft:#fff5df; --mimic-theme-rgb:146,89,0; }
+html.mimic-dark-mode[data-mimic-theme="violet"] { --mimic-blue:#b6a0ff; --mimic-blue-hover:#c9baff; --mimic-blue-soft:#30244f; }
+html.mimic-dark-mode[data-mimic-theme="teal"] { --mimic-blue:#70d7dc; --mimic-blue-hover:#a0ecef; --mimic-blue-soft:#153b40; }
+html.mimic-dark-mode[data-mimic-theme="rose"] { --mimic-blue:#ff91b2; --mimic-blue-hover:#ffb0c6; --mimic-blue-soft:#482337; }
+html.mimic-dark-mode[data-mimic-theme="amber"] { --mimic-blue:#ffd078; --mimic-blue-hover:#ffe0a3; --mimic-blue-soft:#44351c; }
+#root .bg-blue-600, #root .bg-blue-700 { background-color:var(--mimic-blue) !important; }
+#root .hover\:bg-blue-700:hover { background-color:var(--mimic-blue-hover) !important; }
+#root .text-blue-400, #root .text-blue-500, #root .text-blue-600, #root .text-blue-700 { color:var(--mimic-blue) !important; }
+#root .border-blue-500, #root .border-blue-600 { border-color:var(--mimic-blue) !important; }
+
+.mimic-start-screen { min-height:100vh; color:var(--mimic-text); background:radial-gradient(circle at 8% 8%,rgba(var(--mimic-theme-rgb),.11),transparent 30%),linear-gradient(145deg,#f7faff 0%,#eaf1fb 100%); }
+.mimic-start-shell { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr); align-items:center; gap:clamp(24px,5vw,64px); padding:clamp(18px,4vw,48px); border:1px solid var(--mimic-border); border-radius:28px; background:var(--mimic-surface); box-shadow:var(--mimic-shadow); }
+.mimic-start-copy { padding:12px 0; }
+.mimic-start-brand { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:46px; color:var(--mimic-text); font-size:22px; font-weight:900; letter-spacing:.13em; }
+.mimic-brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius:13px; color:#fff; background:var(--mimic-blue); font-size:23px; box-shadow:0 8px 20px rgba(var(--mimic-theme-rgb),.25); }
+.mimic-brand-period { color:var(--mimic-blue); }
+.mimic-start-badge { margin-left:4px; padding:6px 9px; border-radius:999px; color:var(--mimic-blue); background:var(--mimic-blue-soft); font-size:9px; letter-spacing:.08em; }
+.mimic-start-kicker { margin:0 0 12px; color:var(--mimic-blue); font-size:11px; font-weight:850; letter-spacing:.14em; }
+.mimic-start-copy h1 { max-width:620px; margin:0; color:var(--mimic-text); font-size:clamp(36px,5vw,62px); line-height:1.06; letter-spacing:-.045em; font-weight:900; }
+.mimic-start-copy h1 span { color:var(--mimic-blue); }
+.mimic-start-lead { max-width:540px; margin:22px 0 28px; color:var(--mimic-muted); font-size:17px; line-height:1.75; }
+.mimic-start-button { display:inline-flex; align-items:center; gap:18px; min-height:52px; padding:0 23px; border:0; border-radius:13px; color:#fff; background:var(--mimic-blue); font-size:16px; font-weight:800; box-shadow:0 9px 22px rgba(var(--mimic-theme-rgb),.22); transition:transform .18s,filter .18s; }
+.mimic-start-button:hover { transform:translateY(-2px); filter:brightness(1.08); }
+.mimic-start-button span { font-size:21px; }
+.mimic-start-footnote { margin:28px 0 0; color:var(--mimic-muted); font-size:12px; }
+.mimic-appearance-picker { padding:22px; border:1px solid var(--mimic-border); border-radius:20px; background:var(--mimic-surface-raised); box-shadow:var(--mimic-shadow); color:var(--mimic-text); }
+.mimic-appearance-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.mimic-appearance-heading h2 { margin:0; color:var(--mimic-text); font-size:21px; font-weight:850; }
+.mimic-appearance-description { margin:7px 0 0; color:var(--mimic-muted); font-size:13px; line-height:1.55; }
+.mimic-appearance-eyebrow { margin:0 0 6px; color:var(--mimic-blue); font-size:9px; font-weight:900; letter-spacing:.14em; }
+.mimic-appearance-preview { display:grid; place-items:center; flex:0 0 48px; height:48px; border-radius:14px; color:var(--mimic-blue); background:var(--mimic-blue-soft); font-size:23px; font-weight:900; }
+.mimic-appearance-modes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:20px; }
+.mimic-mode-choice { display:flex; flex-direction:column; align-items:flex-start; gap:8px; min-width:0; padding:11px 9px; border:1px solid var(--mimic-border); border-radius:12px; color:var(--mimic-text); background:var(--mimic-surface); text-align:left; cursor:pointer; }
+.mimic-mode-choice.selected { border:2px solid var(--mimic-blue); padding:10px 8px; background:var(--mimic-blue-soft); box-shadow:0 0 0 3px rgba(var(--mimic-theme-rgb),.09); }
+.mimic-mode-choice strong { display:block; font-size:12px; font-weight:850; }
+.mimic-mode-choice small { display:block; margin-top:2px; color:var(--mimic-muted); font-size:10px; line-height:1.35; }
+.mode-glyph { display:grid; place-items:center; width:30px; height:30px; border-radius:9px; font-size:18px; }
+.light-glyph { color:#925900; background:#fff2cf; }.dark-glyph { color:#b8ceff; background:#243858; }.contrast-glyph { color:#ffff00; background:#000; }
+.mimic-palette-block { margin-top:19px; padding-top:16px; border-top:1px solid var(--mimic-border); }
+.mimic-palette-label { display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--mimic-text); font-size:12px; }
+.mimic-palette-label span,.mimic-palette-current { color:var(--mimic-muted); font-size:11px; }
+.mimic-palette-options { display:flex; align-items:center; gap:13px; margin-top:13px; }
+.mimic-palette-option { display:grid; place-items:center; width:34px; height:34px; padding:4px; border:2px solid transparent; border-radius:50%; background:transparent; cursor:pointer; }
+.mimic-palette-option span { display:block; width:23px; height:23px; border-radius:50%; background:var(--swatch); box-shadow:inset 0 0 0 1px rgba(0,0,0,.1); }
+.mimic-palette-option.selected { border-color:var(--swatch); outline:2px solid var(--swatch-ring); outline-offset:2px; }
+.mimic-palette-current { margin:10px 0 0; }
+.mimic-mode-shell { padding:clamp(8px,2vw,20px) 0; }
+.mimic-mode-header { margin:18px 0 30px; text-align:center; }
+.mimic-mode-header h1 { margin:0; color:var(--mimic-text); font-size:clamp(30px,4vw,44px); font-weight:900; letter-spacing:-.03em; }
+.mimic-mode-header p:last-child { margin:10px 0 0; color:var(--mimic-muted); }
+.mimic-mode-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-bottom:24px; }
+.mimic-mode-card { display:flex; flex-direction:column; align-items:flex-start; min-height:225px; padding:23px; border:1px solid var(--mimic-border); border-radius:18px; color:var(--mimic-text); background:var(--mimic-surface); text-align:left; box-shadow:var(--mimic-shadow); transition:transform .18s,border-color .18s; }
+.mimic-mode-card:hover { transform:translateY(-3px); border-color:var(--mimic-blue); }
+.mimic-mode-card-icon { margin-bottom:20px; font-size:34px; }
+.mimic-mode-card strong { margin-bottom:9px; font-size:17px; font-weight:850; }
+.mimic-mode-card > span:not(.mimic-mode-card-icon) { color:var(--mimic-muted); font-size:13px; line-height:1.6; }
+.mimic-mode-card b { margin-top:auto; padding-top:20px; color:var(--mimic-blue); font-size:12px; }
+.mimic-appearance-picker.is-compact { max-width:760px; margin:0 auto; }
+html.mimic-dark-mode:not(.mimic-high-contrast) .mimic-start-screen { background:radial-gradient(circle at 10% 5%,rgba(var(--mimic-theme-rgb),.2),transparent 32%),linear-gradient(145deg,#081426,#0d1c32); }
+html.mimic-dark-mode:not(.mimic-high-contrast) .mimic-start-shell,
+html.mimic-dark-mode:not(.mimic-high-contrast) .mimic-appearance-picker,
+html.mimic-dark-mode:not(.mimic-high-contrast) .mimic-mode-card { background:var(--mimic-surface); }
+html.mimic-dark-mode:not(.mimic-high-contrast) .mimic-mode-choice { background:#0c1b30; }
+html.mimic-dark-mode:not(.mimic-high-contrast) .mimic-mode-choice.selected { background:var(--mimic-blue-soft); }
+html.mimic-high-contrast .mimic-start-screen { background:#000 !important; }
+html.mimic-high-contrast .mimic-start-shell,
+html.mimic-high-contrast .mimic-appearance-picker,
+html.mimic-high-contrast .mimic-mode-card,
+html.mimic-high-contrast .mimic-mode-choice { color:#fff !important; background:#000 !important; border:2px solid #fff !important; box-shadow:none !important; }
+html.mimic-high-contrast .mimic-start-copy h1,
+html.mimic-high-contrast .mimic-start-copy h1 span,
+html.mimic-high-contrast .mimic-appearance-heading h2,
+html.mimic-high-contrast .mimic-mode-header h1,
+html.mimic-high-contrast .mimic-mode-card strong { color:#fff !important; }
+html.mimic-high-contrast .mimic-start-kicker,
+html.mimic-high-contrast .mimic-mode-card b { color:#ffff00 !important; }
+html.mimic-high-contrast .mimic-start-button,
+html.mimic-high-contrast .mimic-mode-choice.selected { color:#000 !important; background:#ffff00 !important; border:2px solid #ffff00 !important; }
+html.mimic-high-contrast .mimic-start-button { color:#000 !important; }
+html.mimic-high-contrast .mimic-mode-choice.selected strong,
+html.mimic-high-contrast .mimic-mode-choice.selected small { color:#000 !important; }
+html.mimic-high-contrast .mimic-palette-option { border-color:#fff !important; background:#000 !important; }
+html.mimic-high-contrast .mimic-palette-option span { background:var(--swatch) !important; border:1px solid #fff; }
+@media (max-width:800px) { .mimic-start-shell { grid-template-columns:1fr; max-width:650px; margin:auto; }.mimic-start-brand { margin-bottom:28px; }.mimic-mode-grid { grid-template-columns:1fr; }.mimic-mode-card { min-height:180px; } }
+@media (max-width:420px) { .mimic-appearance-picker { padding:15px; }.mimic-appearance-modes { gap:5px; }.mimic-mode-choice { padding:9px 6px; }.mimic-mode-choice strong { font-size:11px; }.mimic-mode-choice small { font-size:9px; }.mimic-palette-options { gap:8px; } }
+
+/* Ensure the high-contrast palette remains visible over the global reset. */
+html.mimic-high-contrast #root .mimic-start-shell,
+html.mimic-high-contrast #root .mimic-appearance-picker,
+html.mimic-high-contrast #root .mimic-mode-card,
+html.mimic-high-contrast #root .mimic-mode-choice { background:#000 !important; color:#fff !important; border:2px solid #fff !important; }
+html.mimic-high-contrast #root .mimic-start-button,
+html.mimic-high-contrast #root .mimic-mode-choice.selected { background:#ffff00 !important; color:#000 !important; border:2px solid #ffff00 !important; }
+html.mimic-high-contrast #root .mimic-start-button *,
+html.mimic-high-contrast #root .mimic-mode-choice.selected * { color:#000 !important; }
+html.mimic-high-contrast #root .mimic-palette-option { background:#000 !important; border-color:#fff !important; }
+html.mimic-high-contrast #root .mimic-palette-option span { background:var(--swatch) !important; }
+
+/* MIMIC visual refresh: clearer hierarchy, generous spacing and resilient contrast. */
+.mimic-featured-tool { position: relative; }
+.mimic-section-intro { margin: 0 0 1rem; padding: 1.25rem 1.5rem; border-left: 5px solid var(--mimic-blue); border-radius: 0 16px 16px 0; background: var(--mimic-surface); box-shadow: var(--mimic-shadow); }
+.mimic-eyebrow { display: inline-block; margin-bottom: .45rem; color: var(--mimic-blue); font-size: .72rem; font-weight: 850; letter-spacing: .14em; }
+.mimic-section-intro h2 { margin: 0; color: var(--mimic-text); font-size: clamp(1.35rem, 3vw, 2rem); font-weight: 850; line-height: 1.2; }
+.mimic-section-intro p { margin: .5rem 0 0; color: var(--mimic-muted); }
+#page-content { scroll-behavior: smooth; }
+#page-content > div > section { scroll-margin-top: 1.5rem; }
+
+/* High contrast must use opaque, predictable surfaces. The previous blanket
+   transparent-background rule made white text disappear on inherited surfaces. */
+html.mimic-high-contrast, html.mimic-high-contrast body { color-scheme: dark !important; background: #000 !important; color: #fff !important; }
+html.mimic-high-contrast #root { background: #000 !important; color: #fff !important; }
+html.mimic-high-contrast #root header,
+html.mimic-high-contrast #root aside,
+html.mimic-high-contrast #root main section,
+html.mimic-high-contrast #root main .rounded-xl,
+html.mimic-high-contrast #root main .rounded-2xl,
+html.mimic-high-contrast #root main .bg-white,
+html.mimic-high-contrast #root main .bg-gray-50,
+html.mimic-high-contrast #root main .bg-gray-100,
+html.mimic-high-contrast #root main textarea,
+html.mimic-high-contrast #root main input,
+html.mimic-high-contrast #root main select {
+  color: #fff !important; background: #080808 !important; background-image: none !important;
+  border: 2px solid #fff !important; box-shadow: none !important;
+}
+html.mimic-high-contrast #root main,
+html.mimic-high-contrast #root main p,
+html.mimic-high-contrast #root main label,
+html.mimic-high-contrast #root main h1,
+html.mimic-high-contrast #root main h2,
+html.mimic-high-contrast #root main h3,
+html.mimic-high-contrast #root main li,
+html.mimic-high-contrast #root main span,
+html.mimic-high-contrast #root header p,
+html.mimic-high-contrast #root aside p,
+html.mimic-high-contrast #root aside h2 { color: #fff !important; }
+html.mimic-high-contrast #root button,
+html.mimic-high-contrast #root button * { color: #000 !important; background: #ffeb00 !important; border: 2px solid #ffeb00 !important; }
+html.mimic-high-contrast #root a,
+html.mimic-high-contrast #root a * { color: #ffeb00 !important; text-decoration: underline !important; }
+html.mimic-high-contrast #root input::placeholder,
+html.mimic-high-contrast #root textarea::placeholder { color: #ddd !important; opacity: 1 !important; }
+html.mimic-high-contrast #root option { color: #fff !important; background: #000 !important; }
+html.mimic-high-contrast #root #overview { color: #fff !important; background: #000 !important; border: 3px solid #ffeb00 !important; }
+html.mimic-high-contrast #root #overview * { color: #fff !important; background-color: transparent !important; }
+html.mimic-high-contrast .mimic-section-intro { background: #000 !important; border: 2px solid #ffeb00 !important; border-left-width: 6px !important; }
+html.mimic-high-contrast .mimic-section-intro h2,
+html.mimic-high-contrast .mimic-section-intro p,
+html.mimic-high-contrast .mimic-section-intro span { color: #fff !important; }
+html.mimic-high-contrast #root :focus-visible { outline: 3px solid #ffeb00 !important; outline-offset: 4px !important; }
+@media (prefers-reduced-motion: reduce) { #root *, #root *::before, #root *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* MIMIC Mission Rehearsal — a calm, confidence-building task simulator */
+.mimic-mission-card{overflow:hidden;border:1px solid #dbe3f0;border-radius:28px;background:#fff;box-shadow:0 18px 55px rgba(15,23,42,.09);color:#172033}
+.mimic-mission-hero{position:relative;overflow:hidden;padding:clamp(26px,5vw,48px);background:radial-gradient(circle at 88% 20%,rgba(129,140,248,.42),transparent 28%),linear-gradient(120deg,#101b3c,#273b78 58%,#5141a2);color:#fff}
+.mimic-mission-orbit{position:absolute;right:7%;top:8%;font-size:clamp(90px,14vw,170px);line-height:1;color:rgba(255,255,255,.12);text-shadow:0 0 45px rgba(255,255,255,.3)}
+.mimic-mission-kicker,.mimic-mission-label{display:block;font-size:11px;font-weight:900;letter-spacing:.16em;color:#a5b4fc}
+.mimic-mission-hero h2{position:relative;max-width:680px;margin:13px 0 10px;font-size:clamp(27px,4vw,42px);line-height:1.12;font-weight:850;letter-spacing:-.035em}
+.mimic-mission-hero p{position:relative;max-width:650px;color:#e0e7ff;line-height:1.65}
+.mimic-mission-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(22px,4vw,42px);padding:clamp(20px,4vw,38px)}
+.mimic-mission-prompt h3,.mimic-mission-empty h3{font-size:23px;font-weight:800;margin:8px 0}.mimic-mission-prompt>div:first-child p,.mimic-mission-empty p{color:#64748b;font-size:14px;line-height:1.6}
+.mimic-mission-presets{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:20px 0}
+.mimic-mission-preset{display:flex;align-items:center;gap:9px;text-align:left;padding:12px;border:1px solid #dbe3f0;border-radius:13px;background:#f8fafc;color:#25324a;font-size:13px;font-weight:700;cursor:pointer;transition:.2s}
+.mimic-mission-preset span{font-size:20px}.mimic-mission-preset:hover,.mimic-mission-preset.selected{border-color:#6366f1;background:#eef2ff;box-shadow:0 0 0 2px rgba(99,102,241,.12)}
+.mimic-mission-field{display:block;margin:14px 0;color:#25324a;font-size:13px;font-weight:800}.mimic-mission-field>span{color:#64748b;font-weight:500}.mimic-mission-field input,.mimic-mission-field textarea{display:block;width:100%;margin-top:7px;padding:12px 13px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#172033;font:inherit;font-size:14px;outline-offset:2px}.mimic-mission-field input:focus,.mimic-mission-field textarea:focus{outline:3px solid #a5b4fc;border-color:#4f46e5}.mimic-mission-start{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:18px;padding:14px 17px;border:0;border-radius:13px;background:linear-gradient(100deg,#4338ca,#6d5ce7);color:#fff;font-weight:800;cursor:pointer}.mimic-mission-start:disabled{opacity:.45;cursor:not-allowed}.mimic-mission-start span{font-size:22px}.mimic-mission-privacy{margin-top:12px;color:#64748b;font-size:11px;line-height:1.5}
+.mimic-mission-output{min-width:0;padding:22px;border:1px solid #e2e8f0;border-radius:20px;background:linear-gradient(160deg,#f8faff,#f1f5ff)}.mimic-mission-empty{display:flex;min-height:390px;flex-direction:column;align-items:center;justify-content:center;text-align:center}.mimic-mission-empty>div{display:grid;width:76px;height:76px;place-items:center;border-radius:24px;background:#e0e7ff;font-size:36px}.mimic-mission-empty h3{margin-top:20px}.mimic-mission-empty p{max-width:300px}.mimic-mission-empty>span{margin-top:20px;color:#6366f1;font-size:10px;font-weight:900;letter-spacing:.18em}
+.mimic-mission-progress{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:end}.mimic-mission-progress strong{display:block;margin-top:6px;color:#172033;font-size:15px}.mimic-mission-progress>b{color:#4f46e5;font-size:22px}.mimic-mission-track{grid-column:1/-1;height:8px;overflow:hidden;border-radius:20px;background:#dbe3f5}.mimic-mission-track i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#4f46e5,#06b6d4);transition:width .3s}
+.mimic-mission-steps{display:grid;gap:10px;margin:18px 0}.mimic-mission-step{display:grid;grid-template-columns:18px 34px 1fr;gap:10px;align-items:start;padding:13px;border:1px solid #dbe3f0;border-radius:14px;background:#fff;cursor:pointer}.mimic-mission-step input{width:17px;height:17px;margin:4px 0;accent-color:#4f46e5}.mimic-mission-step-number{display:grid;width:30px;height:30px;place-items:center;border-radius:10px;background:#eef2ff;color:#4338ca;font-size:11px;font-weight:900}.mimic-mission-step strong{display:block;color:#172033;font-size:13px}.mimic-mission-step small{display:block;margin-top:4px;color:#475569;font-size:12px;line-height:1.5}.mimic-mission-step em{display:block;margin-top:7px;color:#4f46e5;font-size:11px;font-style:normal;font-weight:750}.mimic-mission-step.complete{border-color:#86efac;background:#f0fdf4}.mimic-mission-step.complete .mimic-mission-step-number{background:#dcfce7;color:#166534}.mimic-mission-ready{padding:14px;border:1px solid #86efac;border-radius:13px;background:#f0fdf4;color:#166534}.mimic-mission-ready p{margin-top:4px;font-size:12px;line-height:1.5}.mimic-mission-safety-toggle,.mimic-mission-reset{margin-top:12px;color:#4338ca;font-size:12px;font-weight:800;text-decoration:underline;text-underline-offset:3px}.mimic-mission-safety{margin-top:10px;padding:13px;border-left:3px solid #f59e0b;border-radius:8px;background:#fffbeb;color:#78350f;font-size:12px;line-height:1.6}.mimic-mission-reset{display:block}.mimic-mission-foot{display:flex;justify-content:space-between;gap:12px;padding:15px 25px;border-top:1px solid #e2e8f0;color:#64748b;font-size:10px}.mimic-mission-foot span:first-child{color:#6366f1;font-weight:900;letter-spacing:.13em}
+html.mimic-high-contrast .mimic-mission-card,html.mimic-high-contrast .mimic-mission-output,html.mimic-high-contrast .mimic-mission-step,html.mimic-high-contrast .mimic-mission-preset,html.mimic-high-contrast .mimic-mission-field input,html.mimic-high-contrast .mimic-mission-field textarea{background:#000!important;color:#fff!important;border:2px solid #fff!important}html.mimic-high-contrast .mimic-mission-hero{background:#000!important;border-bottom:2px solid #fff}html.mimic-high-contrast .mimic-mission-hero p,html.mimic-high-contrast .mimic-mission-step small,html.mimic-high-contrast .mimic-mission-empty p,html.mimic-high-contrast .mimic-mission-prompt>div:first-child p{color:#fff!important}html.mimic-high-contrast .mimic-mission-start,html.mimic-high-contrast .mimic-mission-preset.selected{background:#ff0!important;color:#000!important}html.mimic-high-contrast .mimic-mission-label,html.mimic-high-contrast .mimic-mission-kicker,html.mimic-high-contrast .mimic-mission-step em{color:#ff0!important}
+@media(max-width:760px){.mimic-mission-body{grid-template-columns:1fr}.mimic-mission-empty{min-height:230px}.mimic-mission-foot{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.mimic-mission-card *{transition:none!important}}
+
+/* Decision Lab: consequence-first, playful learning without real-world risk. */
+.mimic-decision-card{overflow:hidden;border:1px solid #dbe4f0;border-radius:28px;background:#fff;color:#14213b;box-shadow:0 20px 60px rgba(15,23,42,.10)}
+.mimic-decision-hero{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(25px,5vw,46px);background:radial-gradient(circle at 82% 10%,rgba(45,212,191,.25),transparent 28%),linear-gradient(115deg,#081c2e,#173c59 55%,#334b83);color:#fff}
+.mimic-decision-kicker,.mimic-decision-tag{font-size:10px;font-weight:900;letter-spacing:.16em;color:#5eead4}
+.mimic-decision-hero h2{max-width:680px;margin:12px 0;font-size:clamp(28px,4vw,43px);line-height:1.08;font-weight:900;letter-spacing:-.04em}
+.mimic-decision-hero p{max-width:650px;color:#d9e8f5;line-height:1.65}
+.mimic-decision-score{flex:none;display:flex;align-items:center;gap:12px;padding:16px 19px;border:1px solid #ffffff40;border-radius:18px;background:#ffffff12}.mimic-decision-score strong{font-size:34px;color:#5eead4}.mimic-decision-score span{font-size:11px;line-height:1.35;color:#e0f2fe}
+.mimic-decision-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:20px 24px 0}.mimic-decision-tabs button{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:2px 10px;padding:13px;border:1px solid #dce5ef;border-radius:15px;background:#f8fafc;color:#24334a;text-align:left;cursor:pointer}.mimic-decision-tabs button>span{grid-row:span 2;font-size:25px}.mimic-decision-tabs button small{font-size:9px;font-weight:900;letter-spacing:.12em;color:#64748b}.mimic-decision-tabs button b{font-size:13px}.mimic-decision-tabs button.active{border-color:#0f766e;background:#ecfdf5;box-shadow:0 0 0 2px #99f6e433}.mimic-decision-stage{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:18px;padding:20px 24px 26px}.mimic-decision-prompt,.mimic-decision-feedback{padding:clamp(18px,3vw,27px);border:1px solid #e1e8f0;border-radius:20px;background:#fbfdff}.mimic-decision-prompt h3,.mimic-decision-feedback h3{margin:10px 0;font-size:22px;font-weight:850;color:#14213b}.mimic-decision-prompt>p,.mimic-decision-feedback>p{color:#526176;font-size:14px;line-height:1.7}.mimic-decision-question{display:block;margin-top:24px;font-size:10px;font-weight:900;letter-spacing:.15em;color:#0f766e}.mimic-decision-choices{display:grid;gap:9px;margin-top:10px}.mimic-decision-choices button{display:grid;grid-template-columns:30px 1fr 18px;align-items:center;gap:10px;padding:12px;border:1px solid #dbe4ee;border-radius:13px;background:#fff;color:#24334a;text-align:left;font-size:13px;font-weight:700;cursor:pointer}.mimic-decision-choices button>span{display:grid;width:27px;height:27px;place-items:center;border-radius:9px;background:#e8eef7;color:#334155;font-weight:900}.mimic-decision-choices button>b{color:#0f766e}.mimic-decision-choices button:hover,.mimic-decision-choices button.chosen{border-color:#0f766e;background:#f0fdfa}.mimic-decision-feedback{display:flex;flex-direction:column;justify-content:center;min-height:300px;background:linear-gradient(150deg,#f1f5f9,#f8fafc)}.mimic-decision-feedback.waiting{text-align:center;align-items:center}.mimic-decision-orb{display:grid;width:64px;height:64px;place-items:center;margin-bottom:15px;border-radius:22px;background:#dff7f2;color:#0f766e;font-size:34px}.mimic-decision-feedback.safe{border-color:#86efac;background:#f0fdf4}.mimic-decision-feedback.high{border-color:#fca5a5;background:#fff7f7}.mimic-decision-feedback.medium{border-color:#fcd34d;background:#fffbeb}.mimic-decision-next{margin-top:16px;padding:15px;border-left:3px solid #0f766e;border-radius:10px;background:#e6fffa}.mimic-decision-next b{font-size:10px;letter-spacing:.12em;color:#0f766e}.mimic-decision-next p{margin-top:5px;color:#173b3b;font-size:13px;line-height:1.6}.mimic-decision-feedback>button{align-self:flex-start;margin-top:14px;color:#0f766e;font-size:12px;font-weight:850;text-decoration:underline}.mimic-decision-footer{display:flex;justify-content:space-between;gap:12px;padding:15px 25px;border-top:1px solid #e5eaf1;color:#64748b;font-size:10px}.mimic-decision-footer span:first-child{font-weight:900;letter-spacing:.13em;color:#0f766e}
+html.mimic-high-contrast .mimic-decision-card,html.mimic-high-contrast .mimic-decision-prompt,html.mimic-high-contrast .mimic-decision-feedback,html.mimic-high-contrast .mimic-decision-tabs button,html.mimic-high-contrast .mimic-decision-choices button{background:#000!important;color:#fff!important;border:2px solid #fff!important}html.mimic-high-contrast .mimic-decision-hero{background:#000!important;border-bottom:2px solid #fff}html.mimic-high-contrast .mimic-decision-hero p,html.mimic-high-contrast .mimic-decision-prompt>p,html.mimic-high-contrast .mimic-decision-feedback>p,html.mimic-high-contrast .mimic-decision-next p{color:#fff!important}html.mimic-high-contrast .mimic-decision-kicker,html.mimic-high-contrast .mimic-decision-tag,html.mimic-high-contrast .mimic-decision-question{color:#ff0!important}html.mimic-high-contrast .mimic-decision-score strong{color:#ff0!important}
+@media(max-width:760px){.mimic-decision-stage{grid-template-columns:1fr}.mimic-decision-tabs{grid-template-columns:1fr;padding-inline:14px}.mimic-decision-hero{align-items:flex-start;flex-direction:column}.mimic-decision-footer{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.mimic-decision-card *{scroll-behavior:auto!important;transition:none!important}}
+
+/* MIMIC onboarding: expressive, spacious, and intentionally easy to scan. */
+.mimic-onboarding{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;padding:clamp(22px,4vw,58px);background:radial-gradient(ellipse at 8% 8%,rgba(139,116,255,.19),transparent 32%),radial-gradient(ellipse at 92% 65%,rgba(61,210,177,.16),transparent 34%),linear-gradient(135deg,#f7f8ff 0%,#edf4ff 48%,#f5fbfa 100%);color:#17233d}
+.mimic-onboarding:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;background-image:radial-gradient(#8da4c8 1px,transparent 1px);background-size:25px 25px;mask-image:linear-gradient(to bottom,black,transparent 82%)}
+.mimic-onboarding-shell{max-width:1120px;margin:auto;position:relative}.mimic-onboarding-orb{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none;z-index:-1}.orb-one{width:340px;height:340px;top:15%;left:-180px;background:linear-gradient(135deg,rgba(126,105,255,.16),rgba(126,105,255,0))}.orb-two{width:420px;height:420px;right:-220px;bottom:2%;background:linear-gradient(135deg,rgba(36,190,164,.14),rgba(36,190,164,0))}
+.mimic-onboarding-top{display:flex;align-items:center;justify-content:space-between;gap:18px}.mimic-brand-mark{display:inline-flex;align-items:center;gap:11px;text-decoration:none!important;color:#1c2a49!important;font-size:19px;font-weight:900;letter-spacing:.12em}.mimic-brand-mark span{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:#243f83;color:#fff;font-size:20px;box-shadow:0 8px 20px #243f8330}.mimic-step-chip{display:flex;align-items:center;gap:9px;padding:10px 14px;border:1px solid #dce4f3;border-radius:999px;background:#ffffffa8;color:#566681;font-size:11px;font-weight:850;letter-spacing:.12em}.mimic-step-chip i{width:7px;height:7px;border-radius:50%;background:#25b99a;box-shadow:0 0 0 4px #25b99a20}
+.mimic-onboarding-hero{max-width:790px;padding:clamp(58px,9vw,108px) 0 48px}.mimic-onboarding-kicker,.mimic-choice-heading>div>span{font-size:11px;letter-spacing:.19em;font-weight:900;color:#6577a1}.mimic-onboarding-hero h1{font-size:clamp(42px,6.4vw,76px);line-height:1.04;letter-spacing:-.055em;font-weight:900;color:#192747;margin:18px 0 22px}.mimic-onboarding-hero h1 em{font-style:normal;color:#5368bd}.mimic-onboarding-subtitle{max-width:650px;font-size:clamp(18px,2vw,21px);line-height:1.7;color:#52617b}
+.mimic-choice-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:19px}.mimic-choice-heading h2{font-size:clamp(23px,3vw,31px);line-height:1.2;margin-top:8px;font-weight:850;color:#1b2947;letter-spacing:-.03em}.mimic-choice-count{font-size:13px;color:#243f83;font-weight:900}.mimic-choice-count b{color:#a6b2c8;padding:0 5px}.mimic-mode-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.mimic-mode-card{display:flex;min-height:290px;flex-direction:column;align-items:flex-start;text-align:left;padding:clamp(23px,3vw,34px);border:1px solid #dbe3f2;border-radius:25px;background:rgba(255,255,255,.82);box-shadow:0 16px 50px rgba(41,66,120,.07);color:#1c2947;backdrop-filter:blur(12px);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.mimic-mode-card:hover,.mimic-mode-card:focus-visible{transform:translateY(-5px);border-color:#8c9be0;box-shadow:0 24px 60px rgba(41,66,120,.14)}.mimic-mode-card-top{display:flex;width:100%;align-items:center;justify-content:space-between;margin-bottom:25px}.mimic-mode-card-icon{display:grid;place-items:center;width:61px;height:61px;border-radius:19px;background:#eeedff;color:#5b56b4;font-size:31px;font-weight:850}.mimic-mode-mint .mimic-mode-card-icon{background:#e3f8f1;color:#087c68}.mimic-mode-number{font-size:13px;font-weight:900;color:#9aa8c1;letter-spacing:.1em}.mimic-mode-detail{font-size:10px;font-weight:900;letter-spacing:.16em;color:#737fa0;margin-bottom:9px}.mimic-mode-card strong{font-size:clamp(22px,2.6vw,29px);line-height:1.2;letter-spacing:-.035em;color:#1b2947}.mimic-mode-description{font-size:17px;line-height:1.6;color:#5a6982;margin-top:12px;max-width:420px}.mimic-mode-action{display:flex;align-items:center;justify-content:space-between;width:100%;margin-top:auto;padding-top:25px;color:#4e5eb2;font-size:15px;font-weight:850}.mimic-mode-mint .mimic-mode-action{color:#087c68}.mimic-mode-action b{font-size:23px}.mimic-onboarding-reassurance{display:flex;align-items:center;gap:13px;margin:23px 0 35px;padding:17px 20px;border:1px solid #dce8e9;border-radius:16px;background:#f4fbf9;color:#53677a}.mimic-onboarding-reassurance>span{font-size:22px;color:#0d997f}.mimic-onboarding-reassurance p{font-size:15px;line-height:1.5}.mimic-onboarding-reassurance strong{color:#203b4a}.mimic-onboarding-appearance{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;border-top:1px solid #dce4f0;border-bottom:1px solid #dce4f0}.mimic-onboarding-appearance>div:first-child{display:flex;flex-direction:column;gap:5px}.mimic-onboarding-appearance strong{font-size:16px;color:#243452}.mimic-onboarding-appearance span{font-size:14px;color:#687792}.mimic-onboarding-footer{display:flex;justify-content:space-between;gap:20px;padding-top:23px;color:#8793a9;font-size:9px;font-weight:900;letter-spacing:.13em}.mimic-mode-card:focus-visible{outline:4px solid #4f6fff;outline-offset:4px}
+@media(max-width:700px){.mimic-mode-grid{grid-template-columns:1fr}.mimic-mode-card{min-height:250px}.mimic-onboarding-hero{padding-top:60px}.mimic-onboarding-footer{flex-direction:column}.mimic-onboarding-appearance{align-items:flex-start;flex-direction:column}.mimic-step-chip{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.mimic-mode-card{transition:none}.mimic-mode-card:hover{transform:none}}
+html.mimic-high-contrast .mimic-onboarding{background:#000!important;color:#fff!important}html.mimic-high-contrast .mimic-onboarding-hero h1,html.mimic-high-contrast .mimic-choice-heading h2,html.mimic-high-contrast .mimic-mode-card strong,html.mimic-high-contrast .mimic-onboarding-appearance strong{color:#fff!important}html.mimic-high-contrast .mimic-onboarding-subtitle,html.mimic-high-contrast .mimic-mode-description,html.mimic-high-contrast .mimic-mode-detail,html.mimic-high-contrast .mimic-onboarding-appearance span{color:#fff!important}html.mimic-high-contrast .mimic-mode-card,html.mimic-high-contrast .mimic-onboarding-reassurance{background:#000!important;color:#fff!important;border:2px solid #fff!important}html.mimic-high-contrast .mimic-mode-action,html.mimic-high-contrast .mimic-mode-card-icon{color:#ff0!important}html.mimic-high-contrast .mimic-mode-card-icon{background:#000!important;border:1px solid #ff0!important}
+
+/* Language lab readability: larger controls and calmer visual hierarchy. */
+.mimic-language-lab{font-size:17px;line-height:1.65;border:1px solid #d8e3f3!important}.mimic-language-lab h2{font-size:clamp(25px,3vw,34px)!important;line-height:1.2}.mimic-language-lab p{line-height:1.7}.mimic-language-lab label{font-size:16px!important;line-height:1.5}.mimic-language-lab select,.mimic-language-lab textarea{font-size:17px!important;line-height:1.55;min-height:50px}.mimic-language-lab textarea{min-height:180px!important}.mimic-language-lab button{font-size:16px;min-height:46px}.mimic-language-lab textarea:focus-visible,.mimic-language-lab select:focus-visible{outline:3px solid #5368bd;outline-offset:2px}.mimic-featured-tool .mimic-section-intro{padding:1.5rem 1.7rem}.mimic-featured-tool .mimic-section-intro h2{font-size:clamp(27px,3.5vw,38px)}.mimic-featured-tool .mimic-section-intro p{font-size:17px;line-height:1.65}
+html.mimic-high-contrast .mimic-language-lab{background:#000!important;color:#fff!important;border:2px solid #fff!important}html.mimic-high-contrast .mimic-language-lab label,html.mimic-high-contrast .mimic-language-lab h2,html.mimic-high-contrast .mimic-language-lab p{color:#fff!important}html.mimic-high-contrast .mimic-language-lab textarea,html.mimic-high-contrast .mimic-language-lab select{background:#000!important;color:#fff!important;border:2px solid #fff!important}
